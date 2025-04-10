@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // this fetches the poster info from the server and update the poster
+    async function fetchPosterInfo() {
+        try {
+            const response = await fetch('/generate-poster', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'},
+                });
+
+                const data = await response.json();
+
+                document.getElementById('title').innerText = data.title;
+                document.getElementById('description').innerText = data.description;
+                document.getElementById('bullet1').innerText = data.bullet1;
+                document.getElementById('bullet2').innerText = data.bullet2;
+                document.getElementById('bullet3').innerText = data.bullet3;
+                document.getElementById('date').innerText = data.date;
+                document.getElementById('time').innerText = data.time;
+                document.getElementById('location').innerText = data.location;
+        } catch (error) {
+            console.error('Error fetching poster info:', error);
+        }
+    }
+
+    // Call the function and sit back baby
+    fetchPosterInfo();
+</script>
+<body>
+    <h1 id="title">Title</h1>
+    <p id="description">description</p>
+    <ul>
+        <li id="bullet1">Item 1</li>
+        <li id="bullet2">Item 2</li>
+        <li id="bullet3">Item 3</li>
+    </ul>
+    <p id="date">Date</p>
+    <p id="time">Time</p>
+    <p id="location">Location</p>
+</body>
+</html>
